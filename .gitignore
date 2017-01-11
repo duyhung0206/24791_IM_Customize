@@ -2,7 +2,7 @@
 .htaccess.sample
 .modgit/
 .modman/
-
+.idea
 /cron.php
 cron.sh
 dev/.htaccess
