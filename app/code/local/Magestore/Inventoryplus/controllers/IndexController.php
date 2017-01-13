@@ -9,8 +9,12 @@
 class Magestore_Inventoryplus_IndexController extends Mage_Core_Controller_Front_Action {
 
     public function indexAction() {
-        $resource = Mage::getResourceModel('inventoryplus/warehouse_product');
-        $result = $resource->getCatalogQty(905);
-        var_dump($result);
+//        $product = Mage::getModel('catalog/product')->load(905);
+//        $product->setFnsku('Some Random Name');
+//
+//        $product->getResource()->saveAttribute($product, 'fnsku');
+////        $product->setAttributeText('fnsku','testt11111')->save();
+//        Zend_Debug::dump(Mage::getResourceModel('catalog/product')->getAttributeRawValue($product->getId(), 'fnsku', 1)) ;
+        die();
     }
 }
