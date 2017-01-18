@@ -119,12 +119,12 @@ class Magestore_Inventorywarehouse_Block_Adminhtml_Requeststock_Edit_Tab_Product
                 'editable' => false,
             ));
 
-        $this->addColumn('entity_id', array(
-            'header' => Mage::helper('catalog')->__('ID'),
-            'sortable' => true,
-            'width' => '60',
-            'index' => 'entity_id'
-        ));
+//        $this->addColumn('entity_id', array(
+//            'header' => Mage::helper('catalog')->__('ID'),
+//            'sortable' => true,
+//            'width' => '60',
+//            'index' => 'entity_id'
+//        ));
 
         $this->addColumn('product_name', array(
             'header' => Mage::helper('catalog')->__('Name'),

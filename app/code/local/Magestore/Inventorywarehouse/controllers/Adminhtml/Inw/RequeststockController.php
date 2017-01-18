@@ -112,6 +112,14 @@ class Magestore_Inventorywarehouse_Adminhtml_Inw_RequeststockController
             Mage::getModel('admin/session')->setData('requeststock_product_import', null);
     }
 
+    public function productsdeliveryAction() {
+        $this->loadLayout();
+        $this->renderLayout();
+//        $this->renderLayout();
+//        if (Mage::getModel('admin/session')->getData('requeststock_product_import'))
+//            Mage::getModel('admin/session')->setData('requeststock_product_import', null);
+    }
+
     public function productsGridAction() {
         $this->loadLayout();
         $this->getLayout()->getBlock('requeststock.edit.tab.products')
@@ -272,6 +280,7 @@ class Magestore_Inventorywarehouse_Adminhtml_Inw_RequeststockController
             $transactionReceiveData['created_by'] = $data['created_by'];
             $transactionReceiveData['reason'] = $data['reason'];
             $transactionReceiveModel->addData($transactionReceiveData);
+            $data['status'] = 3;
             try {
                 if ($this->getRequest()->getParam('id')) {
                     $model = Mage::getModel('inventorywarehouse/requeststock')->load($this->getRequest()->getParam('id'));
@@ -690,4 +699,9 @@ class Magestore_Inventorywarehouse_Adminhtml_Inw_RequeststockController
         Mage::getModel('inventorybarcode/barcode_scanitem')->reset($action);        
     }
 
+    public function newDeliveryAction() {
+        $this->loadLayout();
+        $this->getLayout()->getBlock('requeststock.editdelivery')->setSaveParametersInSession(true);
+        $this->renderLayout();
+    }
 }
