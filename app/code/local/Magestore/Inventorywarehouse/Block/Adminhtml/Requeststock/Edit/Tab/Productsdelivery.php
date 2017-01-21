@@ -51,11 +51,10 @@ class Magestore_Inventorywarehouse_Block_Adminhtml_Requeststock_Edit_Tab_Product
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('inventorywarehouse/requeststockdelivery')->getCollection();
-
         $requestStockId = $this->getRequest()->getParam('id');
+        $collection = Mage::getModel('inventorywarehouse/requeststockdelivery')->getCollection();
         if(isset($requestStockId)){
-
+            $collection->addFieldToFilter('warehouse_requeststock_id', $requestStockId);
         }
         $this->setCollection($collection);
         parent::_prepareCollection();
@@ -65,16 +64,19 @@ class Magestore_Inventorywarehouse_Block_Adminhtml_Requeststock_Edit_Tab_Product
     {
         $html = parent::getMainButtonsHtml();//get the parent class buttons
         $requestStockId = $this->getRequest()->getParam('id');
+        $requeststock = Mage::getModel('inventorywarehouse/requeststock')->load($requestStockId);
+        if($requeststock->getStatus() == 1 || $requeststock->getStatus() == 2)
+            return $html;
         $addButton = $this->getLayout()->createBlock('adminhtml/widget_button') //create the add button
         ->setData(array(
             'label'     => Mage::helper('inventorywarehouse')->__('Create a new delivery'),
-            'onclick'   => "setLocation('".$this->getUrl('*/*/newdelivery')."requeststock_id/".$requestStockId."')",
+            'onclick'   => "setLocation('".$this->getUrl('*/*/newdelivery', array('requeststock_id' => $requestStockId))."')",
             'class' => 'add',
         ))->toHtml();
         $addButton .= $this->getLayout()->createBlock('adminhtml/widget_button') //create the add button
         ->setData(array(
             'label'     => Mage::helper('inventorywarehouse')->__('Create all deliveries'),
-            'onclick'   => "setLocation('".$this->getUrl('*/*/createalldelivery')."requeststock_id/".$requestStockId."')",
+            'onclick'   => "setLocation('".$this->getUrl('*/*/createalldelivery', array('requeststock_id' => $requestStockId))."')",
             'class' => 'add',
         ))->toHtml();
         return $addButton.$html;
@@ -99,7 +101,6 @@ class Magestore_Inventorywarehouse_Block_Adminhtml_Requeststock_Edit_Tab_Product
         $this->addColumn('product_name', array(
             'header' => Mage::helper('catalog')->__('Product Name'),
             'sortable' => true,
-            'width' => '60',
             'index' => 'product_name'
         ));
         $this->addColumn('product_sku', array(
@@ -108,11 +109,11 @@ class Magestore_Inventorywarehouse_Block_Adminhtml_Requeststock_Edit_Tab_Product
             'width' => '60',
             'index' => 'product_sku'
         ));
-        $this->addColumn('sku', array(
+        $this->addColumn('image', array(
             'header' => Mage::helper('catalog')->__('Image'),
             'sortable' => true,
-            'width' => '60',
-            'index' => 'sku'
+            'width' => '90',
+            'renderer' => 'inventorywarehouse/adminhtml_requeststock_editdelivery_renderer_image'
         ));
         $this->addColumn('qty_delivery', array(
             'header' => Mage::helper('catalog')->__('Qty delivery'),
@@ -124,7 +125,7 @@ class Magestore_Inventorywarehouse_Block_Adminhtml_Requeststock_Edit_Tab_Product
             'header' => Mage::helper('catalog')->__('Create by'),
             'sortable' => true,
             'width' => '60',
-            'index' => 'sku'
+            'index' => 'created_by'
         ));
         return parent::_prepareColumns();
     }

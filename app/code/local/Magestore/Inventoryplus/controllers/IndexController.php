@@ -9,12 +9,24 @@
 class Magestore_Inventoryplus_IndexController extends Mage_Core_Controller_Front_Action {
 
     public function indexAction() {
-//        $product = Mage::getModel('catalog/product')->load(905);
-//        $product->setFnsku('Some Random Name');
-//
-//        $product->getResource()->saveAttribute($product, 'fnsku');
-////        $product->setAttributeText('fnsku','testt11111')->save();
-//        Zend_Debug::dump(Mage::getResourceModel('catalog/product')->getAttributeRawValue($product->getId(), 'fnsku', 1)) ;
-        die();
+        $requeststock = Mage::getModel('inventorywarehouse/requeststock')->load(7);
+        $requeststockProducts = Mage::getModel('inventorywarehouse/requeststock_product')->getCollection()
+            ->addFieldToFilter('warehouse_requeststock_id', 7);
+
+        $complete = true;
+        $processing = false;
+        Zend_Debug::dump($requeststockProducts->getData());
+        foreach ($requeststockProducts as $requeststockProduct){
+            if($requeststockProduct->getQty() != $requeststockProduct->getTotalDelivery())
+                $complete = false;
+            if($requeststockProduct->getTotalDelivery() != 0)
+                $processing = true;
+        }
+
+        if($processing)
+            $requeststock->setStatus(4)->save();
+        if ($complete)
+            $requeststock->setStatus(1)->save();
+        echo $requeststock->getStatus();
     }
 }

@@ -30,7 +30,7 @@ $installer->run("
     CREATE TABLE {$this->getTable('erp_inventory_warehouse_requeststock_product_delivery')} (
         `requeststock_delivery_id` int(11) unsigned NOT NULL auto_increment,        
         `warehouse_requeststock_id` int(11) unsigned default NULL,
-        `time` int(11),
+        `time` varchar(255) default '',
         `product_id` int(11) unsigned default NULL,
         `product_name` varchar(255) default '',
         `product_sku` varchar(255) default '',
