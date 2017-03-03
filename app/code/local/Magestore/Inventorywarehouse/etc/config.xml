@@ -17,13 +17,13 @@
  * @category    Magestore
  * @package     Magestore_Inventorywarehouse
  * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
- * @license     http://www.magestore.com/license-agreement.html
+ * @license     http://www.magestore.com/licxense-agreement.html
  */
 -->
 <config>
     <modules>
         <Magestore_Inventorywarehouse>
-            <version>0.1.4</version>
+            <version>0.1.5</version>
         </Magestore_Inventorywarehouse>
     </modules>
     <frontend>
@@ -219,6 +219,9 @@
                     <requeststockdelivery>
                         <table>erp_inventory_warehouse_requeststock_product_delivery</table>
                     </requeststockdelivery>
+                    <sendstockdelivery>
+                        <table>erp_inventory_warehouse_sendstock_product_delivery</table>
+                    </sendstockdelivery>
                     <sendstock>
                         <table>erp_inventory_warehouse_sendstock</table>
                     </sendstock>

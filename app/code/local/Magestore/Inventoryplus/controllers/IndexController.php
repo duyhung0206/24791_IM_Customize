@@ -9,24 +9,28 @@
 class Magestore_Inventoryplus_IndexController extends Mage_Core_Controller_Front_Action {
 
     public function indexAction() {
-        $requeststock = Mage::getModel('inventorywarehouse/requeststock')->load(7);
-        $requeststockProducts = Mage::getModel('inventorywarehouse/requeststock_product')->getCollection()
-            ->addFieldToFilter('warehouse_requeststock_id', 7);
+//        $requeststock = Mage::getModel('inventorywarehouse/requeststock')->load(7);
+//        $requeststockProducts = Mage::getModel('inventorywarehouse/requeststock_product')->getCollection()
+//            ->addFieldToFilter('warehouse_requeststock_id', 7);
+//
+//        $complete = true;
+//        $processing = false;
+//        Zend_Debug::dump($requeststockProducts->getData());
+//        foreach ($requeststockProducts as $requeststockProduct){
+//            if($requeststockProduct->getQty() != $requeststockProduct->getTotalDelivery())
+//                $complete = false;
+//            if($requeststockProduct->getTotalDelivery() != 0)
+//                $processing = true;
+//        }
+//
+//        if($processing)
+//            $requeststock->setStatus(4)->save();
+//        if ($complete)
+//            $requeststock->setStatus(1)->save();
+//        echo $requeststock->getStatus();
 
-        $complete = true;
-        $processing = false;
-        Zend_Debug::dump($requeststockProducts->getData());
-        foreach ($requeststockProducts as $requeststockProduct){
-            if($requeststockProduct->getQty() != $requeststockProduct->getTotalDelivery())
-                $complete = false;
-            if($requeststockProduct->getTotalDelivery() != 0)
-                $processing = true;
-        }
-
-        if($processing)
-            $requeststock->setStatus(4)->save();
-        if ($complete)
-            $requeststock->setStatus(1)->save();
-        echo $requeststock->getStatus();
+        $sendStockProduct = Mage::getModel('inventorywarehouse/sendstockproductdelivery')->getCollection();
+        Zend_Debug::dump($sendStockProduct->getData());
+        die();
     }
 }
