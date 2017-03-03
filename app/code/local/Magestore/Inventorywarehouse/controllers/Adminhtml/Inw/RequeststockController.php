@@ -738,8 +738,8 @@ class Magestore_Inventorywarehouse_Adminhtml_Inw_RequeststockController
     public function newDeliveryAction()
     {
         $purchaseOrderId = $this->getRequest()->getParam('requeststock_id');
-        $purchaseOrderId = 2;
-        $model = Mage::getModel('inventorypurchasing/purchaseorder')->load($purchaseOrderId);
+//        $purchaseOrderId = 2;
+        $model = Mage::getModel('inventorywarehouse/requeststock')->load($purchaseOrderId);
         $this->_title($this->__('Inventory'))
             ->_title($this->__('Add New Delivery'));
         if ($model->getId() || $purchaseOrderId == 0) {

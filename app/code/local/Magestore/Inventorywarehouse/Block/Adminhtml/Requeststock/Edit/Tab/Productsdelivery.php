@@ -92,12 +92,7 @@ class Magestore_Inventorywarehouse_Block_Adminhtml_Requeststock_Edit_Tab_Product
             'width' => '60',
             'index' => 'requeststock_delivery_id'
         ));
-        $this->addColumn('time', array(
-            'header' => Mage::helper('catalog')->__('Date'),
-            'sortable' => true,
-            'width' => '60',
-            'index' => 'time'
-        ));
+
         $this->addColumn('product_name', array(
             'header' => Mage::helper('catalog')->__('Product Name'),
             'sortable' => true,
@@ -119,7 +114,15 @@ class Magestore_Inventorywarehouse_Block_Adminhtml_Requeststock_Edit_Tab_Product
             'header' => Mage::helper('catalog')->__('Qty delivery'),
             'sortable' => true,
             'width' => '60',
+            'type' => 'number',
             'index' => 'qty_delivery'
+        ));
+        $this->addColumn('time', array(
+            'header' => Mage::helper('catalog')->__('Date'),
+            'sortable' => true,
+            'width' => '60',
+            'type' => 'date',
+            'index' => 'time'
         ));
         $this->addColumn('created_by', array(
             'header' => Mage::helper('catalog')->__('Create by'),
